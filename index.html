@@ -1,1 +1,703 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lubis Official Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg1: #030712;
+      --bg2: #0b1224;
+      --card: rgba(15, 23, 42, 0.88);
+      --line: rgba(255,255,255,0.08);
+      --text: #f8fafc;
+      --muted: #a8b3cf;
+      --blue: #60a5fa;
+      --blue2: #38bdf8;
+      --purple: #8b5cf6;
+      --green: #22c55e;
+      --green-dark: #16a34a;
+      --pink: #ec4899;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(96,165,250,0.18), transparent 24%),
+        radial-gradient(circle at top right, rgba(139,92,246,0.16), transparent 20%),
+        radial-gradient(circle at bottom center, rgba(236,72,153,0.10), transparent 20%),
+        linear-gradient(160deg, var(--bg1), var(--bg2));
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .bg-blur {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .bg-blur span {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.25;
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .bg-blur span:nth-child(1) {
+      width: 220px;
+      height: 220px;
+      background: #3b82f6;
+      top: 8%;
+      left: -40px;
+    }
+
+    .bg-blur span:nth-child(2) {
+      width: 260px;
+      height: 260px;
+      background: #8b5cf6;
+      top: 55%;
+      right: -80px;
+      animation-delay: 1s;
+    }
+
+    .bg-blur span:nth-child(3) {
+      width: 180px;
+      height: 180px;
+      background: #ec4899;
+      bottom: 10%;
+      left: 20%;
+      animation-delay: 2s;
+    }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0px); }
+      50% { transform: translateY(-18px); }
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 28px));
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .welcome-screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 0;
+      position: relative;
+    }
+
+    .welcome-card {
+      width: 100%;
+      text-align: center;
+      padding: 40px 22px;
+      border-radius: 32px;
+      border: 1px solid rgba(255,255,255,0.09);
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+      backdrop-filter: blur(14px);
+      box-shadow: 0 24px 70px rgba(0,0,0,0.38);
+      position: relative;
+      overflow: hidden;
+      animation: fadeUp 1s ease;
+    }
+
+    .welcome-card::before {
+      content: "";
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      right: -70px;
+      top: -70px;
+      background: radial-gradient(circle, rgba(96,165,250,0.24), transparent 65%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .welcome-card::after {
+      content: "";
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      left: -50px;
+      bottom: -60px;
+      background: radial-gradient(circle, rgba(139,92,246,0.20), transparent 65%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .small-badge {
+      display: inline-block;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(96,165,250,0.12);
+      border: 1px solid rgba(255,255,255,0.10);
+      color: #dbeafe;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+      box-shadow: 0 0 24px rgba(96,165,250,0.16);
+    }
+
+    .welcome-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(2rem, 7vw, 4.6rem);
+      line-height: 1.08;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      letter-spacing: 1px;
+    }
+
+    .welcome-title span {
+      color: #93c5fd;
+      text-shadow: 0 0 20px rgba(96,165,250,0.85);
+    }
+
+    .welcome-text {
+      max-width: 780px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.9;
+    }
+
+    .quote-box {
+      margin: 24px auto 0;
+      max-width: 760px;
+      padding: 18px 16px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #d9e7ff;
+      font-weight: 600;
+      line-height: 1.8;
+      box-shadow: inset 0 0 20px rgba(255,255,255,0.02);
+    }
+
+    .welcome-actions {
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .enter-btn,
+    .ghost-btn,
+    .nav-btn,
+    .btn,
+    .buy-btn {
+      transition: 0.25s ease;
+    }
+
+    .enter-btn:hover,
+    .ghost-btn:hover,
+    .nav-btn:hover,
+    .btn:hover,
+    .buy-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .enter-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      min-height: 54px;
+      padding: 0 26px;
+      border-radius: 16px;
+      font-weight: 800;
+      color: white;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      box-shadow: 0 14px 30px rgba(96,165,250,0.25);
+      letter-spacing: 0.5px;
+    }
+
+    .ghost-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      min-height: 54px;
+      padding: 0 26px;
+      border-radius: 16px;
+      font-weight: 700;
+      color: white;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .main-store {
+      padding-bottom: 50px;
+    }
+
+    .navbar {
+      padding: 14px 18px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(12px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+      margin-bottom: 18px;
+    }
+
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    .logo span {
+      color: #93c5fd;
+      text-shadow: 0 0 18px rgba(96,165,250,0.8);
+    }
+
+    .nav-btn {
+      text-decoration: none;
+      color: white;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      padding: 11px 18px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      box-shadow: 0 10px 25px rgba(96,165,250,0.18);
+    }
+
+    .hero {
+      margin-top: 18px;
+      padding: 34px 22px;
+      border-radius: 30px;
+      border: 1px solid rgba(255,255,255,0.09);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      box-shadow: 0 24px 65px rgba(0,0,0,0.32);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -70px;
+      bottom: -70px;
+      width: 230px;
+      height: 230px;
+      background: radial-gradient(circle, rgba(96,165,250,0.22), transparent 65%);
+      pointer-events: none;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: rgba(96,165,250,0.12);
+      border: 1px solid rgba(158,208,255,0.2);
+      color: #d8ecff;
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .hero h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.8rem, 6vw, 3.6rem);
+      line-height: 1.08;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .hero h1 span {
+      color: #93c5fd;
+      text-shadow: 0 0 20px rgba(96,165,250,0.85);
+    }
+
+    .hero p {
+      max-width: 720px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 0.98rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .btn {
+      text-decoration: none;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      color: white;
+      box-shadow: 0 10px 28px rgba(96,165,250,0.22);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.04);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .section {
+      padding: 34px 0 60px;
+    }
+
+    .section-head {
+      margin-bottom: 18px;
+    }
+
+    .section-head h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.3rem, 4vw, 2rem);
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .product-slider {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(270px, 86%);
+      gap: 16px;
+      overflow-x: auto;
+      padding: 6px 2px 14px;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(158,208,255,0.35) transparent;
+    }
+
+    .product-slider::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .product-slider::-webkit-scrollbar-thumb {
+      background: rgba(158,208,255,0.35);
+      border-radius: 999px;
+    }
+
+    .product-card {
+      scroll-snap-align: start;
+      border-radius: 26px;
+      overflow: hidden;
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 16px 45px rgba(0,0,0,0.3);
+      transition: 0.25s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(158,208,255,0.22);
+    }
+
+    .product-image {
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+      background: linear-gradient(145deg, rgba(96,165,250,0.15), rgba(139,92,246,0.15));
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .product-body {
+      padding: 18px;
+    }
+
+    .product-tag {
+      display: inline-block;
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #d8ecff;
+      background: rgba(96,165,250,0.12);
+      border: 1px solid rgba(158,208,255,0.18);
+      margin-bottom: 12px;
+    }
+
+    .product-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .product-desc {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.7;
+      min-height: 64px;
+      margin-bottom: 14px;
+    }
+
+    .price {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 800;
+      margin-bottom: 14px;
+      text-shadow: 0 0 16px rgba(96,165,250,0.35);
+    }
+
+    .buy-btn {
+      width: 100%;
+      border: none;
+      min-height: 48px;
+      border-radius: 14px;
+      font-weight: 800;
+      font-size: 0.96rem;
+      color: white;
+      background: linear-gradient(135deg, var(--green), var(--green-dark));
+      box-shadow: 0 12px 24px rgba(34,197,94,0.22);
+      cursor: pointer;
+    }
+
+    .info-grid {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .info-box {
+      padding: 18px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .info-box h3 {
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+
+    .info-box p {
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.92rem;
+    }
+
+    .footer {
+      text-align: center;
+      color: #90a0c0;
+      font-size: 0.9rem;
+      padding: 6px 0 40px;
+    }
+
+    @media (min-width: 760px) {
+      .product-slider {
+        grid-auto-columns: minmax(290px, 33%);
+      }
+
+      .hero {
+        padding: 42px 34px;
+      }
+
+      .welcome-card {
+        padding: 58px 40px;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-blur">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <section class="welcome-screen">
+    <div class="container">
+      <div class="welcome-card">
+        <div class="small-badge">✨ Official Digital Store • Premium Look • Fast Response</div>
+        <h1 class="welcome-title">
+          Hallo, selamat datang di <span>Store-nya Lubis Official</span>
+        </h1>
+        <p class="welcome-text">
+          Tempat terbaik untuk menemukan produk pilihan dengan tampilan mewah, pelayanan ramah, dan proses order yang simpel.
+          Setiap produk kami hadir untuk memberikan kualitas, kenyamanan, dan pengalaman belanja yang lebih elegan.
+        </p>
+
+        <div class="quote-box">
+          “Bukan sekadar tempat belanja, tapi ruang terbaik untuk memilih yang berkualitas. 
+          Selamat datang, semoga kamu menemukan produk yang paling cocok dan paling kamu suka.”
+        </div>
+
+        <div class="welcome-actions">
+          <a href="#store" class="enter-btn">Masuk Store</a>
+          <a href="https://wa.me/6281234567890?text=Halo%20Lubis%20Official%2C%20saya%20mau%20tanya%20produk" target="_blank" class="ghost-btn">Chat Admin</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="main-store" id="store">
+    <div class="container">
+      <div class="navbar">
+        <div class="logo"><span>LUBIS</span> OFFICIAL</div>
+        <a href="#produk" class="nav-btn">Lihat Produk</a>
+      </div>
+
+      <section class="hero">
+        <div class="badge">⚡ Fast respon • Order via WhatsApp • Desain premium</div>
+        <h1>Produk keren, <span>tampilan elegan</span>, order gampang</h1>
+        <p>
+          Pilih produk favorit kamu dengan tampilan modern dan nyaman dilihat. Geser produk ke samping,
+          cek harga, lalu klik tombol beli untuk langsung terhubung ke WhatsApp admin.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#produk" class="btn btn-primary">Mulai Belanja</a>
+          <a href="https://wa.me/6281234567890?text=Halo%20admin%2C%20saya%20ingin%20tanya%20produk" class="btn btn-secondary" target="_blank">Hubungi Admin</a>
+        </div>
+      </section>
+
+      <section class="section" id="produk">
+        <div class="section-head">
+          <h2>PRODUK PILIHAN</h2>
+          <p>Geser ke samping untuk melihat semua produk yang tersedia.</p>
+        </div>
+
+        <div class="product-slider">
+
+          <div class="product-card">
+            <div class="product-image">
+              <img src="https://placehold.co/800x800/png?text=Produk+1" alt="Produk 1">
+            </div>
+            <div class="product-body">
+              <div class="product-tag">BEST SELLER</div>
+              <div class="product-name">Nama Produk 1</div>
+              <div class="product-desc">
+                Isi deskripsi singkat produk di sini. Nanti foto, nama, dan harga tinggal kamu ganti sendiri.
+              </div>
+              <div class="price">Rp25.000</div>
+              <button class="buy-btn" onclick="beliProduk('Nama Produk 1','Rp25.000')">Beli</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image">
+              <img src="https://placehold.co/800x800/png?text=Produk+2" alt="Produk 2">
+            </div>
+            <div class="product-body">
+              <div class="product-tag">NEW</div>
+              <div class="product-name">Nama Produk 2</div>
+              <div class="product-desc">
+                Produk kedua dengan tampilan premium. Cocok buat isi jasa, akun, panel, script, atau lainnya.
+              </div>
+              <div class="price">Rp50.000</div>
+              <button class="buy-btn" onclick="beliProduk('Nama Produk 2','Rp50.000')">Beli</button>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image">
+              <img src="https://placehold.co/800x800/png?text=Produk+3" alt="Produk 3">
+            </div>
+            <div class="product-body">
+              <div class="product-tag">PROMO</div>
+              <div class="product-name">Nama Produk 3</div>
+              <div class="product-desc">
+                Produk ketiga dengan tombol beli otomatis ke WhatsApp agar pembeli langsung menghubungi kamu.
+              </div>
+              <div class="price">Rp75.000</div>
+              <button class="buy-btn" onclick="beliProduk('Nama Produk 3','Rp75.000')">Beli</button>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="info-grid">
+          <div class="info-box">
+            <h3>Tampilan Premium</h3>
+            <p>Halaman pembuka dibuat mewah dan elegan biar pengunjung langsung tertarik sejak pertama masuk.</p>
+          </div>
+          <div class="info-box">
+            <h3>Order Simpel</h3>
+            <p>Cukup tekan tombol beli, pembeli langsung diarahkan ke WhatsApp kamu dengan pesan otomatis.</p>
+          </div>
+          <div class="info-box">
+            <h3>Mudah Diedit</h3>
+            <p>Nama toko, kata-kata, produk, harga, foto, dan nomor WhatsApp bisa kamu ubah sendiri dengan gampang.</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer">
+        © 2026 Lubis Official Store • All Rights Reserved
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const nomorWhatsApp = "6281234567890";
+
+    function beliProduk(namaProduk, hargaProduk) {
+      const pesan = `Halo admin, saya mau beli ${namaProduk} dengan harga ${hargaProduk}`;
+      const url = `https://wa.me/${nomorWhatsApp}?text=${encodeURIComponent(pesan)}`;
+      window.open(url, "_blank");
+    }
+  </script>
+
+</body>
+  </html>
